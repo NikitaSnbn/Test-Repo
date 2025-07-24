@@ -1,0 +1,123 @@
+{
+	"info": {
+		"_postman_id": "29e27a95-48a4-4761-a622-98c77ae8321c",
+		"name": "SampleAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "46920785",
+		"_collection_link": "https://nikitaingale-741735.postman.co/workspace/Test~2ac26013-cb7a-43e9-9432-6b6aab6336cb/collection/46920785-29e27a95-48a4-4761-a622-98c77ae8321c?action=share&source=collection_link&creator=46920785"
+	},
+	"item": [
+		{
+			"name": "NewRequest",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://reqres.in/api/users?page=2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://reqres.in/api/users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.get(\"Name\");\r",
+							"pm.collectionVariables.set(\"Name\", pm.response.json().name);\r",
+							"//pm.collectionVariables.set(\"Name\", \"variable_value\");\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"QA\");\r",
+							"\r",
+							"\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.name).to.eql(\"QA\");\r",
+							"});\r",
+							"});\r",
+							"\r",
+							"pm.test(\"ValidateHeader\",()=>{\r",
+							"   HeaderName = pm.response.headers.get(\"Connection\")\r",
+							"   console.log(HeaderName)\r",
+							"}\r",
+							")\r",
+							"pm.test(\"Response time is less than 400ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "reqres-free-v1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Nikita\",\r\n    \"job\": \"SQA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "MyName",
+			"value": ""
+		},
+		{
+			"key": "Name",
+			"value": ""
+		}
+	]
+}
